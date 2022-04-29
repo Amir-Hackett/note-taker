@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const { v4: uuidv4 } = require('uuid')
 const { notes } = require('../../db/db')
-const { createNote, findById, editNote, deleteNote } = require('../../lib/notes')
+const { findById, createNote, editNote, deleteNote } = require('../../lib/notes')
 
 router.get('/notes', (req, res) => {
     res.json(notes)
@@ -9,9 +9,6 @@ router.get('/notes', (req, res) => {
 
 //route listens for a post request
 router.post('/notes', (req, res) => {
-
-    // set id based on what the next index of the array will be
-    req.body.id = notes.length.toString()
     
     if (!req.body.id) {
         req.body.id = uuidv4()
